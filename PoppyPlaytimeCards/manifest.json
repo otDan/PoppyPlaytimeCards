@@ -1,0 +1,17 @@
+{
+  "name": "PoppyPlaytimeCards",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/otDan/PoppyPlaytimeCards",
+  "description": "Poppy playtime based cards with jumpscares...",
+  "dependencies": [
+    "BepInEx-BepInExPack_ROUNDS-5.4.1900",
+    "willis81808-UnboundLib-3.1.4",
+    "willis81808-MMHook-1.0.0",
+    "Pykess-CardChoiceSpawnUniqueCardPatch-0.1.8",
+    "Pykess-Pick_N_Cards-0.2.4",
+    "Pykess-PlayerJumpPatch-0.0.2",
+    "Pykess-LegRaycastersPatch-0.0.0",
+    "Root-Classes_Manager_Reborn-1.4.1",
+    "Root-CardThemeLib-1.0.1"
+  ]
+}
