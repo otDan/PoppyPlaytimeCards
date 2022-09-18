@@ -53,7 +53,7 @@ namespace PoppyPlaytimeCards.Card
             var cobwebMono = mommyLongLegsEffect.AddComponent<CobwebMono>();
             Player player = PlayerManager.instance.players[playerId];
             cobwebMono.player = player;
-            PoppyPlaytimeCards.cobwebs.Add(mommyLongLegsEffect);
+            PoppyPlaytimeCards.Cobwebs.Add(mommyLongLegsEffect);
         }
 
         protected override string GetTitle()

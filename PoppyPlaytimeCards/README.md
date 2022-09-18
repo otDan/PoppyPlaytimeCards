@@ -10,6 +10,10 @@
 ## Versions
 - 1.0.1
   - Fix text on cards
-  - Add config for jumpscares
+  - Fix theme color that was black
+  - Fix video player not hiding correctly
+  - Reset everything on game end
+  - Fix cards not resetting properly between games
+  - Try and fix up delays for better minion spawning and consistency
 - 1.0.0
   - Poppy playtime based cards

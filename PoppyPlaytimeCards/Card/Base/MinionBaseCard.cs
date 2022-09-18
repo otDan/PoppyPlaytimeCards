@@ -28,7 +28,7 @@ namespace PoppyPlaytimeCards.Card.Base
 
         internal static bool AIsDoneSpawning = true;
 
-        private const float DelayBetweenSpawns = 0.25f;
+        private const float DelayBetweenSpawns = 0.55f;
 
         public virtual BlockModifier GetBlockStats(Player player)
         { return null; }
@@ -183,7 +183,7 @@ namespace PoppyPlaytimeCards.Card.Base
 
         internal static void OnRemoveCallback(Player player, CardInfo card, int indx)
         {
-            Unbound.Instance.ExecuteAfterSeconds(0.15f, () =>
+            Unbound.Instance.ExecuteAfterSeconds(0.25f, () =>
             {
                 // restore all minions, disable any that were removed
                 foreach ((int minionId, int actorId) in CharacterStatModifiersExtension.GetAdditionalData(player.data.stats).oldMinionIDstoCardIndxMap.Keys.ToList())

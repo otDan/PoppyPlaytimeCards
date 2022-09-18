@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ModdingUtils.GameModes;
 using PoppyPlaytimeCards.Asset;
 using UnboundLib;
 using UnityEngine;
@@ -8,7 +7,7 @@ using UnityEngine.Video;
 
 namespace PoppyPlaytimeCards.Component.Mono
 {
-    internal class JumpScareMono : MonoBehaviour, IPointEndHookHandler, IPickStartHookHandler
+    internal class JumpScareMono : MonoBehaviour
     {
         public static JumpScareMono Instance;
         private readonly GameObject _jumpScarePlayer;
@@ -19,6 +18,7 @@ namespace PoppyPlaytimeCards.Component.Mono
         public JumpScareMono()
         {
             Instance = this;
+            // PoppyPlaytimeCards.jumpScares.Add(gameObject);
             _jumpScarePlayer = Instantiate(AssetManager.JumpScarePlayer);
             _videoPlayer = _jumpScarePlayer.GetComponent<VideoPlayer>();
             foreach (var player in PlayerManager.instance.players)
@@ -104,14 +104,8 @@ namespace PoppyPlaytimeCards.Component.Mono
             });
         }
 
-        public void OnPointEnd()
+        public void Reset()
         { 
-            _videoPlayer.targetTexture.Release();
-            _jumpScarePlayer.SetActive(false);
-        }
-
-        public void OnPickStart()
-        {
             _videoPlayer.targetTexture.Release();
             _jumpScarePlayer.SetActive(false);
         }

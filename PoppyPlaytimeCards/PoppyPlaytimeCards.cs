@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using BepInEx;
 using HarmonyLib;
 using PoppyPlaytimeCards.Card;
 using PoppyPlaytimeCards.Card.Base;
+using PoppyPlaytimeCards.Component.Mono;
 using PoppyPlaytimeCards.Util;
+using UnboundLib;
 using UnboundLib.Cards;
 using UnboundLib.GameModes;
 using UnityEngine;
@@ -29,8 +32,8 @@ namespace PoppyPlaytimeCards
         private const string CompatibilityModName = "PoppyPlaytimeCards";
         public static PoppyPlaytimeCards Instance { get; private set; }
         private const bool DEBUG = false;
-
-        public static List<GameObject> cobwebs = new List<GameObject>();
+        
+        public static List<GameObject> Cobwebs = new();
 
         private void Awake()
         {
@@ -55,7 +58,9 @@ namespace PoppyPlaytimeCards
             ModdingUtils.Utils.Cards.instance.AddOnRemoveCallback(MinionBaseCard.OnRemoveCallback);
             GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, MinionBaseCard.WaitForAIs);
 
-            GameModeManager.AddHook(GameModeHooks.HookPointEnd, PickEnd);
+            GameModeManager.AddHook(GameModeHooks.HookPlayerPickStart, ResetEffects);
+            GameModeManager.AddHook(GameModeHooks.HookPointEnd, ResetEffects);
+            GameModeManager.AddHook(GameModeHooks.HookGameEnd, GameEnd);
         }
         
         public void Log(string debug)
@@ -63,14 +68,33 @@ namespace PoppyPlaytimeCards
             if (DEBUG) UnityEngine.Debug.Log(debug);
         }
 
-        public static IEnumerator PickEnd(IGameModeHandler gm)
+        public static IEnumerator ResetEffects(IGameModeHandler gm)
         {
-            foreach (var cobweb in cobwebs)
+            var jumpScareMono = Instance.gameObject.GetComponent<JumpScareMono>();
+            if (jumpScareMono != null) jumpScareMono.Reset();
+            ResetCobwebs();
+
+            yield return null;
+        }
+
+        private static void ResetCobwebs()
+        {
+            foreach (var cobweb in Cobwebs)
             {
                 Destroy(cobweb);
             }
-            cobwebs = new List<GameObject>();
+
+            Cobwebs = new List<GameObject>();
+        }
+
+        public static IEnumerator GameEnd(IGameModeHandler gm)
+        {
+            var jumpScareMono = Instance.gameObject.GetComponent<JumpScareMono>();
+            if (jumpScareMono != null) Destroy(jumpScareMono);
+            ResetCobwebs();
+
             yield return null;
         }
+
     }
 }

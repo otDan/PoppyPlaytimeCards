@@ -36,6 +36,10 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
+            var tallPlayerEffect = player.gameObject.transform.GetChild(0).gameObject.GetOrAddComponent<TallPlayerEffect>();
+            if (tallPlayerEffect == null) return;
+            tallPlayerEffect.ResetScale();
+            Destroy(tallPlayerEffect);
         }
 
         protected override string GetTitle()

@@ -30,7 +30,8 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
+            var bunzoBunnyMono = player.gameObject.GetComponent<BunzoBunnyMono>();
+            if (bunzoBunnyMono != null) Destroy(bunzoBunnyMono);
         }
 
         protected override string GetTitle()
