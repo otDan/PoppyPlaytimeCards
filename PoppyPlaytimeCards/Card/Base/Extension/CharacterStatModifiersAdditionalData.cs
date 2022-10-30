@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using HarmonyLib;
 
-namespace PoppyPlaytimeCards.Card.Extension
+namespace PoppyPlaytimeCards.Card.Base.Extension
 {
     public class CharacterStatModifiersAdditionalData
     {
@@ -39,12 +39,12 @@ namespace PoppyPlaytimeCards.Card.Extension
         
         // reset additional CharacterStatModifiers when ResetStats is called
         [HarmonyPatch(typeof(CharacterStatModifiers), "ResetStats")]
-        class CharacterStatModifiersPatchResetStats
+        private class CharacterStatModifiersPatchResetStats
         {
             private static void Prefix(CharacterStatModifiers __instance)
             {
                 __instance.GetAdditionalData().oldMinionIDstoCardIndxMap = new Dictionary<(int, int), int>(__instance.GetAdditionalData().minionIDstoCardIndxMap);
-                __instance.GetAdditionalData().minionIDstoCardIndxMap = new Dictionary<(int, int), int>() { };
+                __instance.GetAdditionalData().minionIDstoCardIndxMap = new Dictionary<(int, int), int>();
             }
         }
 

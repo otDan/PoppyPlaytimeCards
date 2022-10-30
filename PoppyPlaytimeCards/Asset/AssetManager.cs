@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Video;
 
 namespace PoppyPlaytimeCards.Asset
 {
@@ -15,15 +13,15 @@ namespace PoppyPlaytimeCards.Asset
         public static GameObject MiniHuggiesCard = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("MiniHuggiesCard");
         public static GameObject MommyLongLegsCard = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("MommyLongLegsCard");
 
-        public static GameObject JumpScarePlayer = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("JumpScarePlayer");
-
-        public static VideoClip BunzoBunny = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("BunzoBunny");
-        public static VideoClip HuggyWuggy = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("HuggyWuggy");
-        public static VideoClip KissyMissy = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("KissyMissy");
-        public static VideoClip MiniHuggiesGreen = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieGreen");
-        public static VideoClip MiniHuggiesRed = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieRed");
-        public static VideoClip MiniHuggiesYellow = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieYellow");
-        public static VideoClip MommyLongLegs = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MommyLongLegs");
+        // public static GameObject JumpScarePlayer = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("JumpScarePlayer");
+        //
+        // public static VideoClip BunzoBunny = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("BunzoBunny");
+        // public static VideoClip HuggyWuggy = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("HuggyWuggy");
+        // public static VideoClip KissyMissy = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("KissyMissy");
+        // public static VideoClip MiniHuggiesGreen = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieGreen");
+        // public static VideoClip MiniHuggiesRed = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieRed");
+        // public static VideoClip MiniHuggiesYellow = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MiniHuggieYellow");
+        // public static VideoClip MommyLongLegs = PoppyPlaytimeAssetsBundle.LoadAsset<VideoClip>("MommyLongLegs");
 
         public static Sprite MiniHuggyFace = PoppyPlaytimeAssetsBundle.LoadAsset<Sprite>("MiniHuggyFace");
 

@@ -8,6 +8,10 @@
 </p>
 
 ## Versions
+- 1.0.2
+  - Fix boot exception with only this mod installed (and dependencies)
+  - No more jump scare screen (mostly copyright issue)
+  - Finally balance changes
 - 1.0.1
   - Fix text on cards
   - Fix theme color that was black

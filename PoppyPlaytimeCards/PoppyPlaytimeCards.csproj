@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="Asset\AssetManager.cs" />
     <Compile Include="Card\Base\MinionBaseCard.cs" />
-    <Compile Include="Card\Extension\CharacterStatModifiersAdditionalData.cs" />
+    <Compile Include="Card\Base\Extension\CharacterStatModifiersAdditionalData.cs" />
     <Compile Include="Card\GrabPackCard.cs" />
     <Compile Include="Card\BunzoBunnyCard.cs" />
     <Compile Include="Card\KissyMissyCard.cs" />
@@ -49,8 +49,6 @@
     <Compile Include="Component\AnimationAutoDestroy.cs" />
     <Compile Include="Component\Mono\BunzoBunnyMono.cs" />
     <Compile Include="Component\Mono\CobwebMono.cs" />
-    <Compile Include="Component\DamagedPlayer.cs" />
-    <Compile Include="Component\Mono\JumpScareMono.cs" />
     <Compile Include="PoppyPlaytimeCards.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AudioController.cs" />

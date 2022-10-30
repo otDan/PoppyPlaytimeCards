@@ -62,9 +62,11 @@ namespace PoppyPlaytimeCards.Component.Mono
                 foreach (Player player in enemiesInRange)
                 {
                     if (!PlayerManager.instance.CanSeePlayer(transform.position, player).canSee) continue;
-                    Vector3 dir = (player.transform.position - transform.position).normalized;
+                    var playerTransform = player.transform;
+                    var position = playerTransform.position;
+                    Vector3 dir = (position - transform.position).normalized;
 
-                    player.data.healthHandler.TakeDamage(Damage * TimeHandler.deltaTime * dir, player.transform.position, null, Player);
+                    player.data.healthHandler.TakeDamage(Damage * TimeHandler.deltaTime * dir, position, null, Player);
                 }
             }
         }

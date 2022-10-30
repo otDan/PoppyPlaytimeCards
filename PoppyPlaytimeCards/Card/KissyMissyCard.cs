@@ -2,7 +2,6 @@
 using PoppyPlaytimeCards.Asset;
 using PoppyPlaytimeCards.Class;
 using PoppyPlaytimeCards.Component;
-using PoppyPlaytimeCards.Component.Mono;
 using PoppyPlaytimeCards.Util;
 using UnboundLib;
 using UnboundLib.Cards;
@@ -22,11 +21,7 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            var jumpScareMono = PoppyPlaytimeCards.Instance.gameObject.GetOrAddComponent<JumpScareMono>();
-            jumpScareMono.AddJumpScare(JumpScareMono.JumpScare.KissyMissy);
-
             block.BlockAction += _ => KissyMissyBlock(player);
-            
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -50,8 +45,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Hitting a player will trigger a jumpscare..." +
-                   "\nBlocking will heal you 25hp";
+            return "Blocking will heal you 25hp";
         }
 
         protected override GameObject GetCardArt()
@@ -61,12 +55,21 @@ namespace PoppyPlaytimeCards.Card
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[] { };
+            return new[]
+            {
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Block Action",
+                    amount = "+25hp",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
+            };
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()

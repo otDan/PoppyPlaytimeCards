@@ -13,7 +13,7 @@ using UnboundLib.Cards;
 using UnboundLib.GameModes;
 using UnboundLib.Networking;
 using UnityEngine;
-using CharacterStatModifiersExtension = PoppyPlaytimeCards.Card.Extension.CharacterStatModifiersExtension;
+using CharacterStatModifiersExtension = PoppyPlaytimeCards.Card.Base.Extension.CharacterStatModifiersExtension;
 
 namespace PoppyPlaytimeCards.Card.Base
 {
@@ -169,8 +169,9 @@ namespace PoppyPlaytimeCards.Card.Base
             GameObject minion = PhotonView.Find(viewId).gameObject;
             var spriteRenderer = minion.GetComponentsInChildren<SpriteRenderer>().First(renderer => renderer.gameObject.name.Contains("P_A_X6"));
             spriteRenderer.sprite = AssetManager.MiniHuggyFace;
-            spriteRenderer.transform.localPosition = Vector3.zero;
-            spriteRenderer.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            var spriteRendererTransform = spriteRenderer.transform;
+            spriteRendererTransform.localPosition = Vector3.zero;
+            spriteRendererTransform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
             spriteRenderer.color = new Color(r,g,b,a);
         }
 

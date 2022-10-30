@@ -22,8 +22,6 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            var jumpScareMono = PoppyPlaytimeCards.Instance.gameObject.GetOrAddComponent<JumpScareMono>();
-            jumpScareMono.AddJumpScare(JumpScareMono.JumpScare.MommyLongLegs);
             block.BlockAction += _ => MommyLongLegsBlock(player);
         }
 
@@ -36,8 +34,11 @@ namespace PoppyPlaytimeCards.Card
         {
             if (!player.data.view.IsMine) return;
             if (Camera.main == null) return;
+            var webSize = AssetManager.MommyLongLegsEffect.transform.localScale;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            SendCobweb(player.playerID, mousePosition);
+            var randomPosition = new Vector2(Random.Range(-webSize.x, webSize.x), Random.Range(-webSize.y, webSize.y));
+            var spawnPosition = mousePosition + randomPosition;
+            SendCobweb(player.playerID, spawnPosition);
         }
 
         public static void SendCobweb(int player, Vector2 mousePosition)
@@ -63,8 +64,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Hitting a player will trigger a jumpscare..." +
-                   "\nBlocking will spawn a web trap on the cursor";
+            return "Blocking will spawn a web trap close to the cursor";
         }
 
         protected override GameObject GetCardArt()
@@ -74,12 +74,21 @@ namespace PoppyPlaytimeCards.Card
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[] { };
+            return new[]
+            {
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Block Action",
+                    amount = "Spawn Cobweb",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
+            };
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()

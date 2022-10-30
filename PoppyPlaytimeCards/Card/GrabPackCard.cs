@@ -1,7 +1,5 @@
 ﻿using ClassesManagerReborn.Util;
 using PoppyPlaytimeCards.Asset;
-using PoppyPlaytimeCards.Component;
-using PoppyPlaytimeCards.Component.Mono;
 using PoppyPlaytimeCards.Util;
 using UnboundLib;
 using UnboundLib.Cards;
@@ -21,14 +19,10 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            var damagedPlayer = player.gameObject.GetOrAddComponent<DamagedPlayer>();
-            damagedPlayer.Player = player;
-            var jumpScareMono = PoppyPlaytimeCards.Instance.gameObject.GetOrAddComponent<JumpScareMono>();
         }
 
         public override void OnRemoveCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-
         }
 
         protected override string GetTitle()

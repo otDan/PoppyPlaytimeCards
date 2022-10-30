@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using BepInEx;
 using HarmonyLib;
 using PoppyPlaytimeCards.Card;
 using PoppyPlaytimeCards.Card.Base;
-using PoppyPlaytimeCards.Component.Mono;
 using PoppyPlaytimeCards.Util;
 using UnboundLib;
 using UnboundLib.Cards;
@@ -21,13 +19,14 @@ namespace PoppyPlaytimeCards
     [BepInDependency("pykess.rounds.plugins.playerjumppatch")]
     [BepInDependency("pykess.rounds.plugins.legraycasterspatch")]
     [BepInDependency("root.classes.manager.reborn")]
+    [BepInDependency("root.cardtheme.lib")]
     [BepInPlugin(ModId, ModName, Version)]
     [BepInProcess("Rounds.exe")]
     public class PoppyPlaytimeCards : BaseUnityPlugin
     {
         private const string ModId = "ot.dan.rounds.poppyplaytimecards";
         private const string ModName = "Poppy Playtime Cards";
-        public const string Version = "1.0.1";
+        public const string Version = "1.0.2";
         public const string ModInitials = "PPC";
         private const string CompatibilityModName = "PoppyPlaytimeCards";
         public static PoppyPlaytimeCards Instance { get; private set; }
@@ -55,6 +54,7 @@ namespace PoppyPlaytimeCards
             CustomCard.BuildCard<MiniHuggiesCard>(card => MiniHuggiesCard.Card = card);
             CustomCard.BuildCard<MommyLongLegsCard>(card => MommyLongLegsCard.Card = card);
 
+            // Minion setup
             ModdingUtils.Utils.Cards.instance.AddOnRemoveCallback(MinionBaseCard.OnRemoveCallback);
             GameModeManager.AddHook(GameModeHooks.HookPlayerPickEnd, MinionBaseCard.WaitForAIs);
 
@@ -70,10 +70,7 @@ namespace PoppyPlaytimeCards
 
         public static IEnumerator ResetEffects(IGameModeHandler gm)
         {
-            var jumpScareMono = Instance.gameObject.GetComponent<JumpScareMono>();
-            if (jumpScareMono != null) jumpScareMono.Reset();
             ResetCobwebs();
-
             yield return null;
         }
 
@@ -89,12 +86,7 @@ namespace PoppyPlaytimeCards
 
         public static IEnumerator GameEnd(IGameModeHandler gm)
         {
-            var jumpScareMono = Instance.gameObject.GetComponent<JumpScareMono>();
-            if (jumpScareMono != null) Destroy(jumpScareMono);
-            ResetCobwebs();
-
-            yield return null;
+            yield return ResetEffects(gm);
         }
-
     }
 }

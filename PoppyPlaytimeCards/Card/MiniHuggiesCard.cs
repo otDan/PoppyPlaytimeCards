@@ -18,6 +18,62 @@ namespace PoppyPlaytimeCards.Card
 {
     internal class MiniHuggiesCard : MinionBaseCard
     {
+        internal static CardInfo Card = null;
+
+        public override void OnSetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
+        {
+            cardInfo.allowMultiple = false;
+            gameObject.GetOrAddComponent<ClassNameMono>().className = PoppyPlaytimeClass.name;
+        }
+
+        public override void OnOnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
+        {
+        }
+
+        protected override GameObject GetCardArt()
+        {
+            return AssetManager.MiniHuggiesCard;
+        }
+
+        protected override string GetDescription()
+        {
+            return "Spawn huggies that chase you all over the map.";
+        }
+
+        protected override CardInfo.Rarity GetRarity()
+        {
+            return CardInfo.Rarity.Rare;
+        }
+
+        protected override CardThemeColor.CardThemeColorType GetTheme()
+        {
+            return ThemeManager.GetRedTheme();
+        }
+
+        protected override string GetTitle()
+        {
+            return "Mini Huggies";
+        }
+
+        protected override CardInfoStat[] GetStats()
+        {
+            return new[]
+            {
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Minions",
+                    amount = "+4",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
+            };
+        }
+
+        public override string GetModName()
+        {
+            return PoppyPlaytimeCards.ModInitials;
+        }
+
         public override Color GetDetailColor(Player player)
         {
             return new Color(1, 1, 1, 0.65f);
@@ -80,56 +136,6 @@ namespace PoppyPlaytimeCards.Card
             var floatCards = new List<string> { "chase", "chase", "lifestealer" };
 
             return ModdingUtils.Utils.Cards.all.Where(card => floatCards.Contains(card.cardName.ToLower())).ToList();
-        }
-
-        protected override GameObject GetCardArt()
-        {
-            return AssetManager.MiniHuggiesCard;
-        }
-
-        protected override string GetDescription()
-        {
-            return "Hitting a player will trigger a jumpscare..." +
-                   "\nSpawn huggies that chase you all over the map.";
-        }
-
-        protected override CardInfo.Rarity GetRarity()
-        {
-            return CardInfo.Rarity.Common;
-        }
-
-        protected override CardInfoStat[] GetStats()
-        {
-            return null;
-        }
-
-        protected override CardThemeColor.CardThemeColorType GetTheme()
-        {
-            return ThemeManager.GetRedTheme();
-        }
-
-        protected override string GetTitle()
-        {
-            return "Mini Huggies";
-        }
-        
-        internal static CardInfo Card = null;
-
-        public override void OnSetupCard(CardInfo cardInfo, Gun gun, ApplyCardStats cardStats, CharacterStatModifiers statModifiers, Block block)
-        {
-            cardInfo.allowMultiple = false;
-            gameObject.GetOrAddComponent<ClassNameMono>().className = PoppyPlaytimeClass.name;
-        }
-
-        public override void OnOnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
-        {
-            var jumpScareMono = PoppyPlaytimeCards.Instance.gameObject.GetOrAddComponent<JumpScareMono>();
-            jumpScareMono.AddJumpScare(JumpScareMono.JumpScare.MiniHuggies);
-        }
-
-        public override string GetModName()
-        {
-            return PoppyPlaytimeCards.ModInitials;
         }
     }
 

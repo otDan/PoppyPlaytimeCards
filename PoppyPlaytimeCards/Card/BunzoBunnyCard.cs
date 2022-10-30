@@ -21,9 +21,6 @@ namespace PoppyPlaytimeCards.Card
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
         {
-            var jumpScareMono = PoppyPlaytimeCards.Instance.gameObject.GetOrAddComponent<JumpScareMono>();
-            jumpScareMono.AddJumpScare(JumpScareMono.JumpScare.BunzoBunny);
-
             var bunzoBunnyMono = player.gameObject.GetOrAddComponent<BunzoBunnyMono>();
             bunzoBunnyMono.Player = player;
         }
@@ -41,8 +38,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Hitting a player will trigger a jumpscare..." + 
-                   "\nReloading will cause a radiance attack";
+            return "Reloading will cause a radiance attack";
         }
 
         protected override GameObject GetCardArt()
@@ -52,12 +48,21 @@ namespace PoppyPlaytimeCards.Card
 
         protected override CardInfo.Rarity GetRarity()
         {
-            return CardInfo.Rarity.Common;
+            return CardInfo.Rarity.Uncommon;
         }
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[] { };
+            return new[]
+            {
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Reload Action",
+                    amount = "Radiance Attack",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
+            };
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
