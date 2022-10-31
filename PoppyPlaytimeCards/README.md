@@ -8,6 +8,10 @@
 </p>
 
 ## Versions
+- 1.0.3
+  - Change bunzo bunny attack, range and frequency, add sound to attack
+  - Cleanup remaining assets
+  - Fix grabby pack model
 - 1.0.2
   - Fix boot exception with only this mod installed (and dependencies)
   - No more jump scare screen (mostly copyright issue)

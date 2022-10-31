@@ -29,6 +29,7 @@ namespace PoppyPlaytimeCards.Asset
         public static GameObject KissyMissyEffect = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("KissyMissyEffect");
         public static GameObject MommyLongLegsEffect = PoppyPlaytimeAssetsBundle.LoadAsset<GameObject>("MommyLongLegsEffect");
 
-        public static AudioClip KissyMissySound = PoppyPlaytimeAssetsBundle.LoadAsset<AudioClip>("kiss");
+        public static AudioClip BunzoBunnySound = PoppyPlaytimeAssetsBundle.LoadAsset<AudioClip>("bunzo_hit");
+        public static AudioClip KissyMissySound = PoppyPlaytimeAssetsBundle.LoadAsset<AudioClip>("kissy_kiss");
     }
 }

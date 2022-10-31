@@ -128,6 +128,7 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\..\..\..\..\..\Games\Steam\steamapps\common\ROUNDS\Rounds_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
