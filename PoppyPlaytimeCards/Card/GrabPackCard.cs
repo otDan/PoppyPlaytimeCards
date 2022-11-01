@@ -15,6 +15,9 @@ namespace PoppyPlaytimeCards.Card
         {
             cardInfo.allowMultiple = false;
             gameObject.GetOrAddComponent<ClassNameMono>();
+
+            statModifiers.movementSpeed = 1.45f;
+            statModifiers.health = 1.25f;
         }
 
         public override void OnAddCard(Player player, Gun gun, GunAmmo gunAmmo, CharacterData data, HealthHandler health, Gravity gravity, Block block, CharacterStatModifiers characterStats)
@@ -47,7 +50,23 @@ namespace PoppyPlaytimeCards.Card
 
         protected override CardInfoStat[] GetStats()
         {
-            return new CardInfoStat[] { };
+            return new[]
+            {
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Speed",
+                    amount = "+45%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                },
+                new CardInfoStat
+                {
+                    positive = true,
+                    stat = "Health",
+                    amount = "+25%",
+                    simepleAmount = CardInfoStat.SimpleAmount.notAssigned
+                }
+            };
         }
 
         protected override CardThemeColor.CardThemeColorType GetTheme()

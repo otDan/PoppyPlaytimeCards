@@ -45,7 +45,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Blocking will heal you 25hp";
+            return "Heal yourself on block";
         }
 
         protected override GameObject GetCardArt()

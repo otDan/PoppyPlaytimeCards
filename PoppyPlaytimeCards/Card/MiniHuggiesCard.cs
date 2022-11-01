@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClassesManagerReborn.Util;
-using HarmonyLib;
 using ModdingUtils.AIMinion;
 using ModdingUtils.Extensions;
 using PoppyPlaytimeCards.Asset;
 using PoppyPlaytimeCards.Card.Base;
 using PoppyPlaytimeCards.Class;
-using PoppyPlaytimeCards.Component.Mono;
 using PoppyPlaytimeCards.Util;
 using UnboundLib;
 using UnityEngine;
-using PlayerStatus = ModdingUtils.Utils.PlayerStatus;
 
 namespace PoppyPlaytimeCards.Card
 {
@@ -37,7 +34,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Spawn huggies that chase you all over the map.";
+            return "Spawn huggies that chase others all over the map";
         }
 
         protected override CardInfo.Rarity GetRarity()
@@ -63,7 +60,7 @@ namespace PoppyPlaytimeCards.Card
                 {
                     positive = true,
                     stat = "Minions",
-                    amount = "+4",
+                    amount = "+3",
                     simepleAmount = CardInfoStat.SimpleAmount.notAssigned
                 }
             };
@@ -90,18 +87,18 @@ namespace PoppyPlaytimeCards.Card
         }
         public override float? GetMaxHealth(Player player)
         {
-            return 15f;
+            return 35f;
         }
         public override int GetNumberOfMinions(Player player)
         {
-            return 4;
+            return 3;
         }
         
         public override CharacterStatModifiersModifier GetCharacterStats(Player player)
         {
             CharacterStatModifiersModifier charStats = new CharacterStatModifiersModifier
             {
-                movementSpeed_mult = 1.5f
+                movementSpeed_mult = 1.35f
             };
 
             return charStats;
@@ -128,7 +125,10 @@ namespace PoppyPlaytimeCards.Card
         
         public override List<Type> GetEffects(Player player)
         {
-            return new List<Type> { typeof(AntSquishEffect) };
+            return new List<Type>
+            {
+                // typeof(AntSquishEffect)
+            };
         }
 
         public override List<CardInfo> GetCards(Player player)
@@ -139,82 +139,82 @@ namespace PoppyPlaytimeCards.Card
         }
     }
 
-    public class AntSquishEffect : MonoBehaviour
-    {
-        private Player _playerToModify;
-        private CharacterStatModifiers _charStatsToModify;
-
-        private void Awake()
-        {
-
-        }
-
-        private void Start()
-        {
-            _playerToModify = gameObject.GetComponent<Player>();
-            _charStatsToModify = gameObject.GetComponent<CharacterStatModifiers>();
-        }
-
-        private void Update()
-        {
-            // if the Ant player hasn't been squished in the minimum amount of time, and is currently alive, check for squish
-            if (!PlayerStatus.PlayerAliveAndSimulated(_playerToModify) ||
-                !(Time.time >= _timeOfLastSquish + _minTimeBetweenSquishes)) return;
-            var enemyPlayers = PlayerManager.instance.players.Where(player => PlayerStatus.PlayerAliveAndSimulated(player) && (player.teamID != _playerToModify.teamID)).ToList();
-
-            foreach (Player enemyPlayer in enemyPlayers)
-            {
-                // get the displacement vector from the Ant player to the enemy player, only if the enemy is at least 1.1x the mass of the Ant player
-                float mass = (float)Traverse.Create(_playerToModify.data.playerVel).Field("mass").GetValue();
-                float enemyMass = (float)Traverse.Create(enemyPlayer.data.playerVel).Field("mass").GetValue();
-
-                if (!(enemyMass >= _minMassFactor * mass)) continue;
-                Vector2 displacement = enemyPlayer.transform.position - _playerToModify.transform.position;
-                if (!(displacement.magnitude <= _range) ||
-                    !(Vector2.Angle(Vector2.up, displacement) <= Math.Abs(_angleThreshold / 2))) continue;
-                // if the enemy player is both within range and within the specified angle above the player, then squish the Ant player
-                //float damage = this.damagePerc * (enemy_mass / mass) * this.playerToModify.data.maxHealth;
-                float damage = _playerToModify.data.maxHealth * 2f; // instakill player
-
-                _playerToModify.data.healthHandler.TakeDamage(new Vector2(0, damage * -1), _playerToModify.transform.position, Color.red, null, enemyPlayer, true, false);
-                // reset the time since last squish and return
-                ResetTimer();
-                return;
-            }
-        }
-
-        public void OnDestroy()
-        {
-        }
-
-        public void ResetTimer()
-        {
-            _timeOfLastSquish = Time.time;
-        }
-
-        public void Destroy()
-        {
-            Destroy(this);
-        }
-
-        public void SetDamagePercentage(float percentage)
-        {
-            _damagePercentage = percentage;
-        }
-
-        public void IncreaseDamagePercentage(float inc)
-        {
-            _damagePercentage += inc;
-            _damagePercentage = Math.Min(_damagePercentage, 0.75f);
-        }
-
-        private float
-          _damagePercentage = 0.0f,
-          _timeOfLastSquish = -1f;
-        private readonly float 
-            _range = 1.5f,
-            _angleThreshold = 30f,
-            _minTimeBetweenSquishes = 0.5f,
-            _minMassFactor = 1.1f;
-    }
+    // public class AntSquishEffect : MonoBehaviour
+    // {
+    //     private Player _playerToModify;
+    //     private CharacterStatModifiers _charStatsToModify;
+    //
+    //     private void Awake()
+    //     {
+    //
+    //     }
+    //
+    //     private void Start()
+    //     {
+    //         _playerToModify = gameObject.GetComponent<Player>();
+    //         _charStatsToModify = gameObject.GetComponent<CharacterStatModifiers>();
+    //     }
+    //
+    //     private void Update()
+    //     {
+    //         // if the Ant player hasn't been squished in the minimum amount of time, and is currently alive, check for squish
+    //         if (!PlayerStatus.PlayerAliveAndSimulated(_playerToModify) ||
+    //             !(Time.time >= _timeOfLastSquish + _minTimeBetweenSquishes)) return;
+    //         var enemyPlayers = PlayerManager.instance.players.Where(player => PlayerStatus.PlayerAliveAndSimulated(player) && (player.teamID != _playerToModify.teamID)).ToList();
+    //
+    //         foreach (Player enemyPlayer in enemyPlayers)
+    //         {
+    //             // get the displacement vector from the Ant player to the enemy player, only if the enemy is at least 1.1x the mass of the Ant player
+    //             float mass = (float)Traverse.Create(_playerToModify.data.playerVel).Field("mass").GetValue();
+    //             float enemyMass = (float)Traverse.Create(enemyPlayer.data.playerVel).Field("mass").GetValue();
+    //
+    //             if (!(enemyMass >= _minMassFactor * mass)) continue;
+    //             Vector2 displacement = enemyPlayer.transform.position - _playerToModify.transform.position;
+    //             if (!(displacement.magnitude <= _range) ||
+    //                 !(Vector2.Angle(Vector2.up, displacement) <= Math.Abs(_angleThreshold / 2))) continue;
+    //             // if the enemy player is both within range and within the specified angle above the player, then squish the Ant player
+    //             //float damage = this.damagePerc * (enemy_mass / mass) * this.playerToModify.data.maxHealth;
+    //             float damage = _playerToModify.data.maxHealth * 2f; // instakill player
+    //
+    //             _playerToModify.data.healthHandler.TakeDamage(new Vector2(0, damage * -1), _playerToModify.transform.position, Color.red, null, enemyPlayer, true, false);
+    //             // reset the time since last squish and return
+    //             ResetTimer();
+    //             return;
+    //         }
+    //     }
+    //
+    //     public void OnDestroy()
+    //     {
+    //     }
+    //
+    //     public void ResetTimer()
+    //     {
+    //         _timeOfLastSquish = Time.time;
+    //     }
+    //
+    //     public void Destroy()
+    //     {
+    //         Destroy(this);
+    //     }
+    //
+    //     public void SetDamagePercentage(float percentage)
+    //     {
+    //         _damagePercentage = percentage;
+    //     }
+    //
+    //     public void IncreaseDamagePercentage(float inc)
+    //     {
+    //         _damagePercentage += inc;
+    //         _damagePercentage = Math.Min(_damagePercentage, 0.75f);
+    //     }
+    //
+    //     private float
+    //       _damagePercentage = 0.0f,
+    //       _timeOfLastSquish = -1f;
+    //     private readonly float 
+    //         _range = 1.5f,
+    //         _angleThreshold = 30f,
+    //         _minTimeBetweenSquishes = 0.5f,
+    //         _minMassFactor = 1.1f;
+    // }
 }

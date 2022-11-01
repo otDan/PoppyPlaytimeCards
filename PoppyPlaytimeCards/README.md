@@ -8,6 +8,10 @@
 </p>
 
 ## Versions
+- 1.0.4
+  - Remove insta kill on step for huggies
+  - Add stats to grabby pack
+  - Change descriptions
 - 1.0.3
   - Change bunzo bunny attack, range and frequency, add sound to attack
   - Cleanup remaining assets

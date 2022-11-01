@@ -5,7 +5,6 @@ using HarmonyLib;
 using PoppyPlaytimeCards.Card;
 using PoppyPlaytimeCards.Card.Base;
 using PoppyPlaytimeCards.Util;
-using UnboundLib;
 using UnboundLib.Cards;
 using UnboundLib.GameModes;
 using UnityEngine;
@@ -26,7 +25,7 @@ namespace PoppyPlaytimeCards
     {
         private const string ModId = "ot.dan.rounds.poppyplaytimecards";
         private const string ModName = "Poppy Playtime Cards";
-        public const string Version = "1.0.3";
+        public const string Version = "1.0.4";
         public const string ModInitials = "PPC";
         private const string CompatibilityModName = "PoppyPlaytimeCards";
         public static PoppyPlaytimeCards Instance { get; private set; }

@@ -36,7 +36,7 @@ namespace PoppyPlaytimeCards.Card
             if (Camera.main == null) return;
             var webSize = AssetManager.MommyLongLegsEffect.transform.localScale;
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var randomPosition = new Vector2(Random.Range(-webSize.x, webSize.x), Random.Range(-webSize.y, webSize.y));
+            var randomPosition = new Vector2(Random.Range(-webSize.x * 2, webSize.x * 2), Random.Range(-webSize.y * 2, webSize.y * 2));
             var spawnPosition = mousePosition + randomPosition;
             SendCobweb(player.playerID, spawnPosition);
         }
@@ -64,7 +64,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Blocking will spawn a web trap close to the cursor";
+            return "Spawn a web trap close to your cursor";
         }
 
         protected override GameObject GetCardArt()

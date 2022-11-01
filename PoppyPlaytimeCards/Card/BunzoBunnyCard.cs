@@ -38,7 +38,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override string GetDescription()
         {
-            return "Reloading will cause a radiance attack";
+            return "Attack with your sound waves";
         }
 
         protected override GameObject GetCardArt()
