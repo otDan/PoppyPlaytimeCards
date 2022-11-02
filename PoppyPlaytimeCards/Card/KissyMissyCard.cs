@@ -74,7 +74,7 @@ namespace PoppyPlaytimeCards.Card
 
         protected override CardThemeColor.CardThemeColorType GetTheme()
         {
-            return ThemeManager.GetRedTheme();
+            return ThemeManager._poppyRed;
         }
 
         public override string GetModName()

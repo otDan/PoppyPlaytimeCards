@@ -8,6 +8,8 @@
 </p>
 
 ## Versions
+- 1.0.5
+  - Update art to be consistent
 - 1.0.4
   - Remove insta kill on step for huggies
   - Add stats to grabby pack

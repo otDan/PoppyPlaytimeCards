@@ -4,8 +4,6 @@ namespace PoppyPlaytimeCards.Util
 {
     internal class ThemeManager
     {
-        private static CardThemeColor.CardThemeColorType _poppyRed;
-
         public static void LoadThemes()
         {
             _poppyRed = CardThemeLib.CardThemeLib.instance.CreateOrGetType("PoppyRed", 
@@ -16,9 +14,7 @@ namespace PoppyPlaytimeCards.Util
                 });
         }
 
-        public static CardThemeColor.CardThemeColorType GetRedTheme()
-        {
-            return _poppyRed;
-        }
+        public static CardThemeColor.CardThemeColorType 
+            _poppyRed;
     }
 }
